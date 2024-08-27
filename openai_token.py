@@ -255,4 +255,16 @@ def cli(proxy, refresh_token, access_token, sess_key, share_token):
 
 
 if __name__ == '__main__':
+    # 读取 token.json 文件内容
+    with open('token.json', 'r') as file:
+        token_data = json.load(file)
+    
+    # 从文件中获取 device_token 和 refresh_token
+    device_token = token_data.get('device_token')
+    refresh_token = token_data.get('refresh_token')
+    
+    # 创建 TokenManager 实例，并传递读取到的 token 值
+    obj = TokenManager(device_token=device_token, refresh_token=refresh_token)
+    
+    # 执行命令行接口逻辑
     cli()
